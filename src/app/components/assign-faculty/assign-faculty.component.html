@@ -1,0 +1,48 @@
+<div>
+  <h4>CSE A</h4>
+</div>
+
+<div *ngIf="cseA.sub?.length > 1; else noItems">
+  <div *ngIf="editStatus;else template">
+    <ul class="collection">
+      <li class="collection-item">
+        <h4 class="nav-content">{{selectedClass}}</h4>
+        <form (ngSubmit)="applyChanges()">
+          <div *ngFor="let sub of cseA.sub; let i = index" class="input-field col s6">
+            <mat-form-field>
+              <mat-label>{{sub}}</mat-label>
+              <mat-select [(value)]="selectedStaff[i]">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let faculty of facultyNames" (onSelectionChange)="optionChange(faculty, i, sub)" [value]="faculty" >{{faculty}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div>
+            <button (click)="editField()" style="margin-right: 10px" class="btn orange">Cancel</button>
+            <input type="submit" value="Apply Changes" class="btn">
+          </div>
+        </form>
+      </li>
+    </ul>
+  </div>
+
+  <ng-template #template>
+    <div>
+      <ul class="collection">
+        <li class="collection-item">
+          <h4 class="nav-content">{{selectedClass}}</h4>
+          <div *ngFor="let sub of cseA.sub; let i = index" class="input-field col s6">
+            <p>{{fillField(sub, i)}}</p>
+          </div>
+          <div>
+            <button (click)="editField()" style="margin-right: 10px" class="btn orange">Edit</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </ng-template>
+</div>
+
+<ng-template #noItems> Loading.... </ng-template>
+
+<button (click)="print()">click me</button>

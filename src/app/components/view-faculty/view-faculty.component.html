@@ -1,0 +1,38 @@
+<div>
+  <ul class="collection">
+    <li class="collection-item">
+      <p class="nav-content">
+        Add Faculty
+        <a href="#"></a>
+        <i (click)="openDialog($event)" class="fa fa-plus-circle"></i>
+      </p>
+      <div *ngIf="addState">
+        <form (ngSubmit)="addFaculty()">
+          <div class="input-field col s6">
+            <input type="text" placeholder="Name" [(ngModel)]="this.name" name="name">
+          </div>
+          <div class="input-field col s6">
+            <input type="text" placeholder="Email" [(ngModel)]="this.email" name="email">
+          </div>
+          <div class="input-field col s6">
+            <input type="password" placeholder="Password" [(ngModel)]="this.password" name="password">
+          </div>
+          <div>
+            <button (click)="clearState()" style="margin-right: 10px" class="btn orange">Cancel</button>
+            <input type="submit" value="Add Faculty" class="btn">
+          </div>
+        </form>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="faculty?.length > 0; else noItems">
+  <ul *ngFor="let faculty of faculty" class="collection">
+    <li class="collection-item"><strong>{{ faculty.name }}</strong> <p>{{faculty.email}}</p></li>
+  </ul>
+</div>
+
+<ng-template #noItems>
+Loading...
+</ng-template>

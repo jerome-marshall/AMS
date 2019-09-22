@@ -1,0 +1,141 @@
+<div>
+  <h4>{{class.dept}} {{class.sec}}</h4>
+</div>
+<div *ngIf="editStatus; else template">
+  <table mat-table [dataSource]="data" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="day">
+      <th mat-header-cell *matHeaderCellDef> Day </th>
+      <td mat-cell *matCellDef="let element"> {{element.day}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pOne">
+      <th mat-header-cell *matHeaderCellDef> 1 </th>
+      <td mat-cell *matCellDef="let element; let n = index">
+        <mat-form-field>
+          <mat-select>
+            <mat-option *ngFor="let sub of classSub; let i = index;" [value]="sub" (onSelectionChange)="selectionChange(sub, n, 1)" >{{sub}}</mat-option>
+          </mat-select>
+        </mat-form-field> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pTwo">
+      <th mat-header-cell *matHeaderCellDef> 2 </th>
+      <td mat-cell *matCellDef="let element; let n = index">
+        <mat-form-field>
+          <mat-select>
+            <mat-option *ngFor="let sub of classSub; let i = index;" [value]="sub" (onSelectionChange)="selectionChange(sub, n, 2)" >{{sub}}</mat-option>
+          </mat-select>
+        </mat-form-field> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pThree">
+      <th mat-header-cell *matHeaderCellDef> 3 </th>
+      <td mat-cell *matCellDef="let element; let n = index">
+        <mat-form-field>
+          <mat-select>
+            <mat-option *ngFor="let sub of classSub; let i = index;" [value]="sub" (onSelectionChange)="selectionChange(sub, n, 3)" >{{sub}}</mat-option>
+          </mat-select>
+        </mat-form-field> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pFour">
+      <th mat-header-cell *matHeaderCellDef> 4 </th>
+      <td mat-cell *matCellDef="let element; let n = index">
+        <mat-form-field>
+          <mat-select class="mat-select" style="margin-outside: 2rem">
+            <mat-option *ngFor="let sub of classSub; let i = index;" [value]="sub" (onSelectionChange)="selectionChange(sub, n, 4)" >{{sub}}</mat-option>
+          </mat-select>
+        </mat-form-field> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pFive">
+      <th mat-header-cell *matHeaderCellDef> 5 </th>
+      <td mat-cell *matCellDef="let element; let n = index">
+        <mat-form-field>
+          <mat-select>
+            <mat-option *ngFor="let sub of classSub; let i = index;" [value]="sub" (onSelectionChange)="selectionChange(sub, n, 5)" >{{sub}}</mat-option>
+          </mat-select>
+        </mat-form-field> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pSix">
+      <th mat-header-cell *matHeaderCellDef> 6 </th>
+      <td mat-cell *matCellDef="let element; let n = index">
+        <mat-form-field>
+          <mat-select>
+            <mat-option *ngFor="let sub of classSub; let i = index;" [value]="sub" (onSelectionChange)="selectionChange(sub, n, 6)" >{{sub}}</mat-option>
+          </mat-select>
+        </mat-form-field> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pSeven">
+      <th mat-header-cell *matHeaderCellDef> 7 </th>
+      <td mat-cell *matCellDef="let element; let n = index">
+        <mat-form-field>
+          <mat-select>
+            <mat-option *ngFor="let sub of classSub; let i = index;" [value]="sub" (onSelectionChange)="selectionChange(sub, n, 7)" >{{sub}}</mat-option>
+          </mat-select>
+        </mat-form-field> </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" style="align-content: center"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div>
+    <button class="mat-raised-button" mat-raised-button (click)="setTimetable()" >Save</button>
+    <button class="mat-raised-button" mat-raised-button (click)="editTimetable()" >Cancel</button>
+  </div>
+</div>
+
+<ng-template #template>
+  <div>
+    <table mat-table [dataSource]="data" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="day">
+        <th mat-header-cell *matHeaderCellDef> Day </th>
+        <td mat-cell *matCellDef="let element"> {{element.day}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="pOne">
+        <th mat-header-cell *matHeaderCellDef> 1 </th>
+        <td mat-cell *matCellDef="let element; let n = index">{{setData(n, 0)}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="pTwo">
+        <th mat-header-cell *matHeaderCellDef> 2 </th>
+        <td mat-cell *matCellDef="let element; let n = index">{{setData(n, 1)}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="pThree">
+        <th mat-header-cell *matHeaderCellDef> 3 </th>
+        <td mat-cell *matCellDef="let element; let n = index">{{setData(n, 2)}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="pFour">
+        <th mat-header-cell *matHeaderCellDef> 4 </th>
+        <td mat-cell *matCellDef="let element; let n = index">{{setData(n, 3)}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="pFive">
+        <th mat-header-cell *matHeaderCellDef> 5 </th>
+        <td mat-cell *matCellDef="let element; let n = index">{{setData(n, 4)}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="pSix">
+        <th mat-header-cell *matHeaderCellDef> 6 </th>
+        <td mat-cell *matCellDef="let element; let n = index">{{setData(n, 5)}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="pSeven">
+        <th mat-header-cell *matHeaderCellDef> 7 </th>
+        <td mat-cell *matCellDef="let element; let n = index">{{setData(n, 6)}}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns" style="align-content: center"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <div>  <button class="mat-elevation-z8" mat-raised-button (click)="editTimetable()" >Edit</button></div>
+</ng-template>
+
